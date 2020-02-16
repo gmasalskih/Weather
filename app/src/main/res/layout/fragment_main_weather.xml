@@ -1,82 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#80DEEA"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="weatherScreen"
+            type="ru.gmasalskih.weather.viewModel.WeatherScreen"/>
+    </data>
 
-    <TextView
-        android:id="@+id/TextView_currentData"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="CurrentData" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80DEEA"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/ImageView_iconOfWeather"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/image_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_currentData"
-        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+        <TextView
+            android:id="@+id/TextView_currentData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="@={weatherScreen.currentData}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="CurrentData" />
 
-    <TextView
-        android:id="@+id/TextView_degrees"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:gravity="center"
-        android:textSize="50sp"
-        app:layout_constraintStart_toStartOf="@+id/ImageView_iconOfWeather"
-        app:layout_constraintTop_toBottomOf="@+id/ImageView_iconOfWeather"
-        tools:text="+10 ℃" />
+        <ImageView
+            android:id="@+id/ImageView_iconOfWeather"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/image_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextView_currentData"
+            app:srcCompat="@drawable/ic_001_sunny" />
 
-    <TextView
-        android:id="@+id/TextView_wind"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/TextView_degrees"
-        app:layout_constraintTop_toTopOf="@+id/TextView_degrees"
-        tools:text="10 km/h" />
+        <TextView
+            android:id="@+id/TextView_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@={weatherScreen.city}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextView_degrees"
+            tools:text="Moscow"
+            style="@style/City_TextView" />
 
-    <TextView
-        android:id="@+id/TextView_humidity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/TextView_degrees"
-        app:layout_constraintStart_toStartOf="@+id/TextView_wind"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_wind"
-        tools:text="80%" />
+        <TextView
+            android:id="@+id/TextView_humidity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textSize="20sp"
+            android:text="@={weatherScreen.humidity}"
+            app:layout_constraintBottom_toBottomOf="@+id/TextView_degrees"
+            app:layout_constraintEnd_toEndOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintStart_toEndOf="@+id/TextView_degrees"
+            app:layout_constraintTop_toBottomOf="@+id/TextView_wind"
+            tools:text="80%" />
 
-    <TextView
-        android:id="@+id/TextView_city"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_degrees"
-        tools:text="Moscow" />
+        <TextView
+            android:id="@+id/TextView_wind"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textSize="20sp"
+            android:text="@={weatherScreen.wind}"
+            app:layout_constraintBottom_toTopOf="@+id/TextView_humidity"
+            app:layout_constraintEnd_toEndOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintStart_toEndOf="@+id/TextView_degrees"
+            app:layout_constraintTop_toTopOf="@+id/TextView_degrees"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            tools:text="10 m/s" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/TextView_degrees"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_weight="2"
+            android:gravity="start"
+            android:textSize="40sp"
+            android:text="@={weatherScreen.degrees}"
+            app:layout_constraintStart_toStartOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintTop_toBottomOf="@+id/ImageView_iconOfWeather"
+            tools:text="+10 ℃" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

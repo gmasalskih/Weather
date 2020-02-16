@@ -1,19 +1,12 @@
 package ru.gmasalskih.weather
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import androidx.fragment.app.Fragment
 
-class CitySelectionActivity : AppCompatActivity() {
-
-    private val fm = supportFragmentManager
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_city_selection)
-        if (fm.findFragmentById(R.id.city_selection_fragment_container) == null) {
-            fm.beginTransaction()
-                .add(R.id.city_selection_fragment_container, MainWeatherFragment())
-                .commit()
-        }
-    }
+class CitySelectionActivity : ActivitySingleFragmentContainer() {
+    override val fragmentInstance: Fragment
+        get() = CitySelectionFragment()
+    override val layoutId: Int
+        get() = R.layout.activity_city_selection
+    override val fragmentContainerId: Int
+        get() = R.id.city_selection_fragment_container
 }

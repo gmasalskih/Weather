@@ -1,85 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#80DEEA"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="weatherScreen"
+            type="ru.gmasalskih.weather.viewModel.WeatherScreen" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80DEEA"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/TextView_currentData"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="start"
-        app:layout_constraintBottom_toTopOf="@+id/ImageView_iconOfWeather"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ImageView_iconOfWeather"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="CurrentData" />
+        <TextView
+            android:id="@+id/TextView_currentData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="start"
+            android:text="@={weatherScreen.currentData}"
+            app:layout_constraintBottom_toTopOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="CurrentData" />
 
-    <ImageView
-        android:id="@+id/ImageView_iconOfWeather"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="32dp"
-        android:contentDescription="@string/image_description"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+        <ImageView
+            android:id="@+id/ImageView_iconOfWeather"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="32dp"
+            android:contentDescription="@string/image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_001_sunny" />
 
-    <TextView
-        android:id="@+id/TextView_degrees"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:textSize="40sp"
-        app:layout_constraintStart_toEndOf="@+id/ImageView_iconOfWeather"
-        app:layout_constraintTop_toTopOf="@+id/ImageView_iconOfWeather"
-        tools:text="+10 ℃" />
+        <TextView
+            android:id="@+id/TextView_humidity"
+            style="@style/weather_attributes_land"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@={weatherScreen.humidity}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/TextView_wind"
+            app:layout_constraintEnd_toEndOf="@+id/TextView_city"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/TextView_wind"
+            tools:text="80%" />
 
-    <TextView
-        android:id="@+id/TextView_wind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toStartOf="@+id/TextView_humidity"
-        app:layout_constraintStart_toEndOf="@+id/TextView_degrees"
-        app:layout_constraintTop_toTopOf="@+id/ImageView_iconOfWeather"
-        tools:text="10 km/h" />
+        <TextView
+            android:id="@+id/TextView_wind"
+            style="@style/weather_attributes_land"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@={weatherScreen.wind}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/TextView_degrees"
+            app:layout_constraintEnd_toStartOf="@+id/TextView_humidity"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/TextView_degrees"
+            tools:text="10 km/h" />
 
-    <TextView
-        android:id="@+id/TextView_humidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ImageView_iconOfWeather"
-        tools:text="80%" />
+        <TextView
+            android:id="@+id/TextView_degrees"
+            style="@style/weather_attributes_land"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:text="@={weatherScreen.degrees}"
+            app:layout_constraintBottom_toTopOf="@+id/TextView_city"
+            app:layout_constraintEnd_toStartOf="@+id/TextView_wind"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/TextView_city"
+            app:layout_constraintTop_toTopOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:text="+10 ℃" />
 
-    <TextView
-        android:id="@+id/TextView_city"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ImageView_iconOfWeather"
-        app:layout_constraintEnd_toEndOf="@+id/TextView_humidity"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/TextView_degrees"
-        tools:text="Moscow" />
+        <TextView
+            android:id="@+id/TextView_city"
+            style="@style/City_TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="@={weatherScreen.city}"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ImageView_iconOfWeather"
+            app:layout_constraintTop_toBottomOf="@+id/TextView_degrees"
+            tools:text="Moscow" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
