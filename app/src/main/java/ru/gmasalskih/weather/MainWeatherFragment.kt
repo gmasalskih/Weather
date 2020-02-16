@@ -1,42 +1,99 @@
 package ru.gmasalskih.weather
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_main_weather.view.*
+import ru.gmasalskih.weather.databinding.FragmentMainWeatherBinding
+import ru.gmasalskih.weather.viewModel.WeatherScreen
 
 class MainWeatherFragment : Fragment() {
 
-    lateinit var currentData: TextView
-    lateinit var iconOfWeather: ImageView
-    lateinit var degrees: TextView
-    lateinit var wind: TextView
-    lateinit var humidity: TextView
-    lateinit var city: TextView
+    lateinit var binding:FragmentMainWeatherBinding
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d("Lifecycle", "Fragment.onAttach()")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Lifecycle", "Fragment.onCreate()")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main_weather, container, false)
+        binding = FragmentMainWeatherBinding.inflate(inflater,container, false).apply {
+            weatherScreen = WeatherScreen()
+        }
+        Log.d("Lifecycle", "Fragment.onCreateView()")
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.apply {
-            currentData = TextView_currentData
-            iconOfWeather = ImageView_iconOfWeather
-            degrees = TextView_degrees
-            wind = TextView_wind
-            humidity = TextView_humidity
-            city = TextView_city
+        binding.TextViewCity.setOnClickListener {
+            binding.weatherScreen?.city = "Ekaterinburg"
+            binding.invalidateAll()
         }
+        if(savedInstanceState != null){
+            binding.weatherScreen?.city = savedInstanceState.getString("city", "Moscow")
+            binding.invalidateAll()
+        }
+        Log.d("Lifecycle", "Fragment.onViewCreated()")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.d("Lifecycle", "Fragment.onActivityCreated()")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("Lifecycle", "Fragment.onStart()")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("Lifecycle", "Fragment.onResume()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("Lifecycle", "Fragment.onPause()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("Lifecycle", "Fragment.onStop()")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("Lifecycle", "Fragment.onDestroyView()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Lifecycle", "Fragment.onDestroy()")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("Lifecycle", "Fragment.onDetach()")
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("city", binding.weatherScreen?.city)
+        Log.d("Lifecycle", "Fragment.onSaveInstanceState()")
     }
 }
 
